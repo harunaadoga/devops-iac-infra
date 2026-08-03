@@ -1,0 +1,9 @@
+---
+- name: Add the user 'node_exporter' as a system user, with no login, no home
+  ansible.builtin.user:
+    name: node_exporter
+    comment: monitoring user
+- name: download files to a target path
+  ansible.builtin.get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v1.9.0/node_exporter-1.9.0.linux-amd64.tar.gz
+    dest: /tmp 
