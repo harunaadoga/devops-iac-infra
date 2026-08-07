@@ -18,8 +18,27 @@
     dest: /tmp 
     remote_src: yes
 
-- name: Copy binary from extracted folder
+- name: Copy binary from extracted folder to /usr/local/bin/node_exporter
   ansible.builtin.copy:
     src: /tmp
-    dest:
+    dest: /usr/local/bin/node_exporter
+    remote_src: yes
+
+- name: Copy the created systemd file to /etc/systemd/system
+  ansible.builtin.copy:
+    src: files/node_exporter.service
+    dest: /etc/systemd/system/
+    notify: systemd-handler
+
+- name: Start and enable the systemd service
+  ansible.builtin.service:
+    name: node_exporter.service
+    state: enabled
+    started: yes
+
+- name: Open port 9100 in the firewall
+  ansible.posix.firewalled:
+    port: 9100/tcp
+    permanent: true
+    state: enabled
 
