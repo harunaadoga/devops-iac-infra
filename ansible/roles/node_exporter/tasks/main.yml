@@ -14,14 +14,15 @@
 
 - name: Extract the downloaded archive
   ansible.builtin.unarchive:
-    src: /tmp
+    src: /tmp/node_exporter-1.9.0.linux-amd64.tar.gz
     dest: /tmp 
     remote_src: yes
 
 - name: Copy binary from extracted folder to /usr/local/bin/node_exporter
   ansible.builtin.copy:
-    src: /tmp
+    src: /tmp/node-exporter-1.9.0.linux-amd64/
     dest: /usr/local/bin/node_exporter
+    mode: '0755'
     remote_src: yes
 
 - name: Copy the created systemd file to /etc/systemd/system
