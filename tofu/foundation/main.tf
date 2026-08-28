@@ -38,6 +38,13 @@ locals {
       disk   = 20
       description = "Slurm compute node"
     }
+
+    demo01 = {
+      cores = 2
+      memory = 2048
+      disk = 20
+      description = "Demo Server"
+    }
     compute02 = {
       cores  = 2
       memory = 2048
